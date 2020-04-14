@@ -55,3 +55,19 @@ describe('Getting "book" objects:', function() {
     });
   });
 });
+
+describe('Creating "book" objects:', function() {
+  describe('createBook()', function(done) {
+    it('Should create a new book given a POSTed JSON body', function(done) {
+      chai.request(HOSTNAME)
+        .post('/create/book')
+        .set('Content-Type', 'application/json')
+        .send({requestFrom: 'chai-http', purpose: 'Dummy JSON for testing'})
+        .end(function (err, res) {
+          expect(err).to.be.null;
+          expect(res).to.have.status(200);
+          done();
+        });
+    });
+  });
+});
