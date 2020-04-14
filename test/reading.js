@@ -6,7 +6,7 @@ chai.use(chaiHttp);
 var config = require('../config.json');
 const HOSTNAME = config.hostname;
 
-describe('Getting "reading" objects:', function() {
+describe('Getting reading objects:', function() {
   describe('getByID()', function() {
     it('Should return a reading with the given integer id.', function(done) {
       chai.request(HOSTNAME)
@@ -56,7 +56,7 @@ describe('Getting "reading" objects:', function() {
   });
 });
 
-describe('Creating "reading" objects:', function() {
+describe('Creating reading objects:', function() {
   describe('createReading()', function() {
     it('Should create a new reading object given a POSTed JSON body.', function(done) {
       chai.request(HOSTNAME)
@@ -72,7 +72,7 @@ describe('Creating "reading" objects:', function() {
   });
 });
 
-describe('Updating "reading" objects:', function() {
+describe('Updating reading objects:', function() {
   describe('updateReadingByID()', function() {
     it('Should update an existing reading object with the given id.', function(done) {
       chai.request(HOSTNAME)
@@ -88,7 +88,7 @@ describe('Updating "reading" objects:', function() {
   });
 });
 
-describe('Deleting "reading" objects:', function() {
+describe('Deleting reading objects:', function() {
   describe('deleteReadingByID()', function() {
     it('Should delete the "reading" object with the given id.', function(done) {
       chai.request(HOSTNAME)

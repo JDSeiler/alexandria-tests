@@ -90,7 +90,7 @@ describe('Updating book objects:', function() {
 
 describe('Deleting book objects:', function() {
   describe('deleteBookByID()', function() {
-    it('Should delete the book object with the given ID', function(done) {
+    it('Should delete the book object with the given ID.', function(done) {
       chai.request(HOSTNAME)
         .delete('/delete/book/123')
         .end(function (err, res) {
