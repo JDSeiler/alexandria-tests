@@ -6,11 +6,11 @@ chai.use(chaiHttp);
 var config = require('../config.json');
 const HOSTNAME = config.hostname;
 
-describe('Getting "book" objects:', function() {
+describe('Getting "reading" objects:', function() {
   describe('getByID()', function() {
-    it('Should return a book with the given integer id.', function(done) {
+    it('Should return a reading with the given integer id.', function(done) {
       chai.request(HOSTNAME)
-	.get('/get/book/id/123')
+	.get('/get/reading/id/123')
         .end(function (err, res) {
           expect(err).to.be.null;
 	  expect(res).to.have.status(200);
@@ -20,9 +20,9 @@ describe('Getting "book" objects:', function() {
   });
 
   describe('getByTitle()', function() {
-    it('Should return a book with the given title.', function(done) {
+    it('Should return all readings for the book with the given title.', function(done) {
       chai.request(HOSTNAME)
-        .get("/get/book/title/MobyDick")
+        .get("/get/reading/title/MobyDick")
         .end(function (err, res) {
           expect(err).to.be.null;
           expect(res).to.have.status(200);
@@ -32,9 +32,9 @@ describe('Getting "book" objects:', function() {
   });
 
   describe('getByAuthor()', function() {
-    it('Should return all books by the given author.', function(done) {
+    it('Should return all readings of any book by the given author.', function(done) {
       chai.request(HOSTNAME)
-        .get("/get/book/author/JohnDoe")
+        .get("/get/reading/author/JohnDoe")
         .end(function (err, res) {
           expect(err).to.be.null;
           expect(res).to.have.status(200);
@@ -44,9 +44,9 @@ describe('Getting "book" objects:', function() {
   });
 
   describe('getAll()', function() {
-    it('Should return all books.', function(done) {
+    it('Should return all readings.', function(done) {
       chai.request(HOSTNAME)
-        .get("/get/book/all")
+        .get("/get/reading/all")
         .end(function (err, res) {
           expect(err).to.be.null;
           expect(res).to.have.status(200);
@@ -56,11 +56,11 @@ describe('Getting "book" objects:', function() {
   });
 });
 
-describe('Creating "book" objects:', function() {
-  describe('createBook()', function() {
-    it('Should create a new book given a POSTed JSON body.', function(done) {
+describe('Creating "reading" objects:', function() {
+  describe('createReading()', function() {
+    it('Should create a new reading object given a POSTed JSON body.', function(done) {
       chai.request(HOSTNAME)
-        .post('/create/book')
+        .post('/create/reading')
         .set('Content-Type', 'application/json')
         .send({requestFrom: 'chai-http', purpose: 'Dummy JSON for testing'})
         .end(function (err, res) {
@@ -72,11 +72,11 @@ describe('Creating "book" objects:', function() {
   });
 });
 
-describe('Updating "book" objects:', function() {
-  describe('updateBookByID()', function() {
-    it('Should update an existing book object with the given ID.', function(done) {
+describe('Updating "reading" objects:', function() {
+  describe('updateReadingByID()', function() {
+    it('Should update an existing reading object with the given id.', function(done) {
       chai.request(HOSTNAME)
-        .put('/update/book/123')
+        .put('/update/reading/123')
         .set('Content-Type', 'application/json')
         .send({requestFrom: 'chai-http', purpose: 'Dummy JSON from testing'})
         .end(function (err, res) {
@@ -88,11 +88,11 @@ describe('Updating "book" objects:', function() {
   });
 });
 
-describe('Deleting "book" objects:', function() {
-  describe('deleteBookByID()', function() {
-    it('Should delete a book object with the given ID', function(done) {
+describe('Deleting "reading" objects:', function() {
+  describe('deleteReadingByID()', function() {
+    it('Should delete the "reading" object with the given id.', function(done) {
       chai.request(HOSTNAME)
-        .delete('/delete/book/123')
+        .delete('/delete/reading/123')
         .end(function (err, res) {
           expect(err).to.be.null;
           expect(res).to.have.status(200);
