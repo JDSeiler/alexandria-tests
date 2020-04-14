@@ -74,11 +74,25 @@ describe('Creating "book" objects:', function() {
 
 describe('Updating "book" objects:', function() {
   describe('updateBookByID()', function() {
-    it('Should update an existing book resource with a given ID.', function(done) {
+    it('Should update an existing book object with the given ID.', function(done) {
       chai.request(HOSTNAME)
         .put('/update/book/123')
         .set('Content-Type', 'application/json')
         .send({requestFrom: 'chai-http', purpose: 'Dummy JSON from testing'})
+        .end(function (err, res) {
+          expect(err).to.be.null;
+          expect(res).to.have.status(200);
+          done();
+        });
+    });
+  });
+});
+
+describe('Deleting "book" objects:', function() {
+  describe('deleteBookByID()', function() {
+    it('Should delete a book object with the given ID', function(done) {
+      chai.request(HOSTNAME)
+        .delete('/delete/book/123')
         .end(function (err, res) {
           expect(err).to.be.null;
           expect(res).to.have.status(200);
