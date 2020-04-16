@@ -10,7 +10,7 @@ describe('Getting book objects:', function() {
   describe('getByID()', function() {
     it('Should return a book with the given integer id.', function(done) {
       chai.request(HOSTNAME)
-	.get('/get/book/id/123')
+	.get('/book/id/123')
         .end(function (err, res) {
           expect(err).to.be.null;
 	  expect(res).to.have.status(200);
@@ -22,7 +22,7 @@ describe('Getting book objects:', function() {
   describe('getByTitle()', function() {
     it('Should return a book with the given title.', function(done) {
       chai.request(HOSTNAME)
-        .get("/get/book/title/MobyDick")
+        .get("/book/title/MobyDick")
         .end(function (err, res) {
           expect(err).to.be.null;
           expect(res).to.have.status(200);
@@ -34,7 +34,7 @@ describe('Getting book objects:', function() {
   describe('getByAuthor()', function() {
     it('Should return all books by the given author.', function(done) {
       chai.request(HOSTNAME)
-        .get("/get/book/author/JohnDoe")
+        .get("/book/author/JohnDoe")
         .end(function (err, res) {
           expect(err).to.be.null;
           expect(res).to.have.status(200);
@@ -46,7 +46,7 @@ describe('Getting book objects:', function() {
   describe('getAll()', function() {
     it('Should return all books.', function(done) {
       chai.request(HOSTNAME)
-        .get("/get/book/all")
+        .get("/book/all")
         .end(function (err, res) {
           expect(err).to.be.null;
           expect(res).to.have.status(200);
@@ -76,7 +76,7 @@ describe('Updating book objects:', function() {
   describe('updateBookByID()', function() {
     it('Should update an existing book object with the given ID.', function(done) {
       chai.request(HOSTNAME)
-        .put('/update/book/123')
+        .put('/book/id/123')
         .set('Content-Type', 'application/json')
         .send({requestFrom: 'chai-http', purpose: 'Dummy JSON from testing'})
         .end(function (err, res) {
@@ -92,7 +92,7 @@ describe('Deleting book objects:', function() {
   describe('deleteBookByID()', function() {
     it('Should delete the book object with the given ID.', function(done) {
       chai.request(HOSTNAME)
-        .delete('/delete/book/123')
+        .delete('/book/id/123')
         .end(function (err, res) {
           expect(err).to.be.null;
           expect(res).to.have.status(200);
