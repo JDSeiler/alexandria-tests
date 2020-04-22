@@ -92,10 +92,10 @@ describe('Deleting book objects:', function() {
   describe('deleteBookByID()', function() {
     it('Should delete the book object with the given ID.', function(done) {
       chai.request(HOSTNAME)
-        .delete('/book/id/123')
+        .delete('/book/id/99999')
         .end(function (err, res) {
           expect(err).to.be.null;
-          expect(res).to.have.status(200);
+          expect(res).to.have.status(204);
           done();
         });
     });
