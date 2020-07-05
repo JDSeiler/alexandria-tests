@@ -58,7 +58,7 @@ describe('Getting book objects:', function() {
 
 describe('Creating book objects:', function() {
   describe('createBook()', function() {
-    it('Should create a new book given a POSTed JSON body.', function(done) {
+    it('TEMP Should reject a new book given an invalid JSON body.', function(done) {
       chai.request(HOSTNAME)
         .post('/create/book')
         .set('Content-Type', 'application/json')
