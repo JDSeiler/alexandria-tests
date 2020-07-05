@@ -65,7 +65,7 @@ describe('Creating book objects:', function() {
         .send({requestFrom: 'chai-http', purpose: 'Dummy JSON for testing'})
         .end(function (err, res) {
           expect(err).to.be.null;
-          expect(res).to.have.status(200);
+          expect(res).to.have.status(400);
           done();
         });
     });
