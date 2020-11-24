@@ -62,7 +62,7 @@ describe('Creating reading objects:', function() {
       chai.request(HOSTNAME)
         .post('/create/reading')
         .set('Content-Type', 'application/json')
-        .send({requestFrom: 'chai-http', purpose: 'Dummy JSON for testing'})
+        .send({book: 12, start_date: "11/12/2020", end_date: "11/24/2020", notes: "Hello from chai"})
         .end(function (err, res) {
           expect(err).to.be.null;
           expect(res).to.have.status(200);
@@ -78,7 +78,7 @@ describe('Updating reading objects:', function() {
       chai.request(HOSTNAME)
         .put('/update/reading')
         .set('Content-Type', 'application/json')
-        .send({id: 1, book: 12, start_date: "11/20/2020", end_date: "11/24/2020", "notes": "Hello from chai"})
+        .send({id: 1, book: 12, start_date: "11/20/2020", end_date: "11/24/2020", notes: "Hello from chai"})
         .end(function (err, res) {
           expect(err).to.be.null;
           expect(res).to.have.status(204);
