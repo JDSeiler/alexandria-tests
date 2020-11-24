@@ -76,12 +76,12 @@ describe('Updating reading objects:', function() {
   describe('updateReadingByID()', function() {
     it('Should update an existing reading object with the given id.', function(done) {
       chai.request(HOSTNAME)
-        .put('/reading/id/123')
+        .put('/update/reading')
         .set('Content-Type', 'application/json')
-        .send({requestFrom: 'chai-http', purpose: 'Dummy JSON from testing'})
+        .send({id: 1, book: 12, start_date: "11/20/2020", end_date: "11/24/2020", "notes": "Hello from chai"})
         .end(function (err, res) {
           expect(err).to.be.null;
-          expect(res).to.have.status(200);
+          expect(res).to.have.status(204);
           done();
         });
     });

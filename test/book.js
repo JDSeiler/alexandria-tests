@@ -76,12 +76,21 @@ describe('Updating book objects:', function() {
   describe('updateBookByID()', function() {
     it('Should update an existing book object with the given ID.', function(done) {
       chai.request(HOSTNAME)
-        .put('/book/id/123')
+        .put('/update/book')
         .set('Content-Type', 'application/json')
-        .send({requestFrom: 'chai-http', purpose: 'Dummy JSON from testing'})
-        .end(function (err, res) {
+        .send({
+    "id": 308,
+    "title": "Test Book 3 - From Chai", 
+    "author": "Jordan Seiler", 
+    "pages": 45, 
+    "genre": "Thriller",
+    "medium": "paper", 
+    "rating": null, 
+    "notes": null
+})
+       .end(function (err, res) {
           expect(err).to.be.null;
-          expect(res).to.have.status(200);
+          expect(res).to.have.status(204);
           done();
         });
     });
