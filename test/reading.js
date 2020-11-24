@@ -65,7 +65,7 @@ describe('Creating reading objects:', function() {
         .send({book: 12, start_date: "11/12/2020", end_date: "11/24/2020", notes: "Hello from chai"})
         .end(function (err, res) {
           expect(err).to.be.null;
-          expect(res).to.have.status(200);
+          expect(res).to.have.status(204);
           done();
         });
     });
