@@ -10,41 +10,17 @@ describe('Getting book objects:', function() {
   describe('getByID()', function() {
     it('Should return a book with the given integer id.', function(done) {
       chai.request(HOSTNAME)
-	.get('/book/id/123')
+	      .get('/book/id/123')
         .end(function (err, res) {
           expect(err).to.be.null;
-	  expect(res).to.have.status(200);
-	  done();
-        });
-    });
-  });
-
-  describe('getByTitle()', function() {
-    it('Should return a book with the given title.', function(done) {
-      chai.request(HOSTNAME)
-        .get("/book/title/MobyDick")
-        .end(function (err, res) {
-          expect(err).to.be.null;
-          expect(res).to.have.status(200);
-          done();
-        });
-    });
-  });
-
-  describe('getByAuthor()', function() {
-    it('Should return all books by the given author.', function(done) {
-      chai.request(HOSTNAME)
-        .get("/book/author/JohnDoe")
-        .end(function (err, res) {
-          expect(err).to.be.null;
-          expect(res).to.have.status(200);
-          done();
+	        expect(res).to.have.status(200);
+	        done();
         });
     });
   });
 
   describe('getAll()', function() {
-    it('Should return all books.', function(done) {
+    it('STUB Should return all books.', function(done) {
       chai.request(HOSTNAME)
         .get("/book/all")
         .end(function (err, res) {
@@ -58,7 +34,7 @@ describe('Getting book objects:', function() {
 
 describe('Creating book objects:', function() {
   describe('createBook()', function() {
-    it('TEMP Should reject a new book given an invalid JSON body.', function(done) {
+    it('Should reject a new book given an invalid JSON body.', function(done) {
       chai.request(HOSTNAME)
         .post('/create/book')
         .set('Content-Type', 'application/json')
@@ -69,6 +45,26 @@ describe('Creating book objects:', function() {
           done();
         });
     });
+
+    it('Should accept a new book given a valid JSON body.', function(done) {
+      chai.request(HOSTNAME)
+        .post('/create/book')
+        .set('Content-Type', 'application/json')
+        .send({
+    "title": "Test Book", 
+    "author": "Mocha Tests", 
+    "pages": 450, 
+    "genre": "Thriller", 
+    "medium": "paper",
+    "rating": null, 
+    "notes": null
+        })
+        .end(function (err, res) {
+          expect(err).to.be.null;
+          expect(res).to.have.status(204);
+          done();
+        })
+    }) 
   });
 });
 
@@ -87,9 +83,32 @@ describe('Updating book objects:', function() {
     "medium": "paper", 
     "rating": null, 
     "notes": null
-})
+        })
        .end(function (err, res) {
           expect(err).to.be.null;
+          expect(res).to.have.header('rows-changed', '1');
+          expect(res).to.have.status(204);
+          done();
+        });
+    });
+
+    it('Should change no rows if id is not found.', function(done) {
+      chai.request(HOSTNAME)
+        .put('/update/book')
+        .set('Content-Type', 'application/json')
+        .send({
+    "id": 99999,
+    "title": "Test Book 3 - From Chai", 
+    "author": "Jordan Seiler", 
+    "pages": 45, 
+    "genre": "Thriller",
+    "medium": "paper", 
+    "rating": null, 
+    "notes": null
+        })
+       .end(function (err, res) {
+          expect(err).to.be.null;
+          expect(res).to.have.header('rows-changed', '0');
           expect(res).to.have.status(204);
           done();
         });
@@ -99,11 +118,12 @@ describe('Updating book objects:', function() {
 
 describe('Deleting book objects:', function() {
   describe('deleteBookByID()', function() {
-    it('Should delete the book object with the given ID.', function(done) {
+    it('Should have 0 rows changed for non-existant ID', function(done) {
       chai.request(HOSTNAME)
-        .delete('/book/id/99999')
+        .delete('/book/id/999999')
         .end(function (err, res) {
           expect(err).to.be.null;
+          expect(res).to.have.header('rows-changed', '0');
           expect(res).to.have.status(204);
           done();
         });
